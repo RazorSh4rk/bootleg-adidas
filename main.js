@@ -45,13 +45,15 @@ function write(a, x, y) {
 function r(max) {
     return Math.floor(Math.random() * Math.floor(max)) + 1;
 }
-function save(){
-    var image = c.toDataURL("image/png").replace("image/png", "image/octet-stream")
-    window.location.href=image
+function download() {
+    var dt = c.toDataURL('image/jpeg')
+    this.href = dt
 }
+downloadLnk.addEventListener('click', download, false);
 
 ctx.fillStyle = 'white'
-ctx.fillRect(-1000, -1000, 1000, 1000)
+ctx.fillRect(0, 0, 1000, 1000)
+
 ctx.translate(0.5 * (wi - stripes), 50)
 if(rot){
     ctx.scale(-1, 1)
@@ -63,8 +65,6 @@ for (var i = 0; i < stripes; i++) {
 if(rot){
     ctx.scale(-1, 1)
 }
-
-
 whiteRect(-wi / 2, lastH, 3000, 3000)
 
 for (var i = 0; i < nameLength; i++) {
@@ -74,4 +74,5 @@ for (var i = 0; i < nameLength; i++) {
         name += letters[r(letters.length) - 1]
     }
 }
+downloadLnk.download = name.toLowerCase() + '.jpg'
 write(name.toLowerCase(), 0 - nameLength * 8, lastH + 30)
